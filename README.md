@@ -18,6 +18,19 @@ le login et mdp par défaut sont demo/demo
 
 il est conseillé de changer la clé de salage dans .env
 
+exemple de génération automatique
+```
+#!/bin/bash
+
+M="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+while [ "${n:=1}" -le "32" ]
+do  pass="$pass${M:$(($RANDOM%${#M})):1}"
+  let n+=1
+done
+echo "$pass"
+```
+
+
 # .htaccess
 
 il est conseillé de créer ou modifier le .htaccess pour faire fonctionner l'application
