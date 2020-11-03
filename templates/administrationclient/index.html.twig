@@ -28,7 +28,7 @@
 
             {% for personne in Clients %}
     <tr >
-                <td>{{ personne.Nom }}</td>
+                <td><a href="{{path('administrationclientdetail',{'id' : personne.id })}}"> {{ personne.Nom }} </a></td>
                 <td>{{ personne.Prenom }}</td>
                         
             <td>

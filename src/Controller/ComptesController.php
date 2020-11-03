@@ -94,4 +94,17 @@ class ComptesController extends AbstractController
 
     }
 
+     /**
+     * @Route("/administration/client/detail/{id}", name="administrationclientdetail")
+     */
+    public function detail($id , Request $request, EntityManagerInterface $objectManager): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Compte::class);
+        $lastcomptes = $repository->findBy(['client' => $id ], array('date' => 'DESC'));
+        return $this->render('administrationcomptes/index.html.twig', [
+            "lastcomptes" => $lastcomptes
+            
+        ]);
+    }
+
 }
