@@ -22,17 +22,19 @@ il est conseillé de changer la clé de salage dans .env
 
 il est conseillé de créer ou modifier le .htaccess pour faire fonctionner l'application
 
-><IfModule mod_rewrite.c>
->   Options -MultiViews
->    RewriteEngine On
->    RewriteCond %{REQUEST_FILENAME} !-f
->    RewriteRule ^(.*)$ public/index.php [QSA,L]
->  </IfModule>
 
-><IfModule !mod_rewrite.c>
->    <IfModule mod_alias.c>
->        RedirectMatch 302 ^/$ public/index.php/
->    </IfModule>
-> </IfModule>
+``` 
+<IfModule mod_rewrite.c>
+   Options -MultiViews
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ public/index.php [QSA,L]
+  </IfModule>
 
+<IfModule !mod_rewrite.c>
+    <IfModule mod_alias.c>
+        RedirectMatch 302 ^/$ public/index.php/
+    </IfModule>
+ </IfModule>
 
+```
