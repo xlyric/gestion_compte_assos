@@ -39,7 +39,7 @@
                 <td>{{ ecriture.Date|date("d/m/Y") }}</td>
                 <td>{{ ecriture.Montant }}</td>
                 <td>{{ ecriture.Codecompta }}</td>
-                <td>{{ ecriture.Client }}</td>
+                <td><a href="{{path('administrationclientdetail',{'id' : ecriture.Client.id  })}}">{{ ecriture.Client }}</a></td>
                 <td><a href={{ '/images/archives/' ~ ecriture.fichier}} target=_blank >{{ ecriture.fichier}}</a></td>
                 <td>{{ ecriture.Commentaire}}</td>
                 <td>{{ ecriture.Comptable }}</td>
