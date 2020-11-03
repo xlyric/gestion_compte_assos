@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdministrationuserController!{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{message}}
+    </div>
+{% endfor %}
+
+
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Utilisateurs autorisés</h1>
+    <a class="btn btn-success" href="{{path('administrationuseradd')}}">Ajouter</a>
+<table class="table">
+    <tr class="table-primary">
+
+        <td>Nom </td>
+        <td>Email</td>
+        <td>Actions</td>
+    
+    </tr>
+
+        <tr>
+
+            {% for personne in users %}
+    <tr >
+                <td>{{ personne.Nom }}</td>
+                <td>{{ personne.Email }}</td>
+                        
+            <td>
+                <a class="btn btn-secondary" href="{{path('administrationusermodif',{'id' : personne.id })}}">Modifier</a>
+              
+              <form method="POST" style="display:inline-block" action="{{path('administrationuserdelete',{'id' : personne.id })}}" onsubmit="return confirm('Confirmer la suppression?')">
+                <input type="hidden" name="_token" value="{{csrf_token('SUP' ~  personne.id )}}">
+                <input type="submit" class="btn btn-danger" value="supprimer"  >
+                </form> 
+            </td>
+    
+    </tr>
+{% endfor %}
+
+
+</table>
+</div>
+{% endblock %}

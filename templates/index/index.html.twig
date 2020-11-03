@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+ {% if not app.user %}
+ <div >
+    <h1>Accès refusé,  Connexion necessaire.  </h1>
+  </div> 
+
+  {% else %}
+<div >
+    <h1>Dernières écritures {{ ga_societe }}</h1>
+
+<table class="table">
+    <tr class="table-primary">
+
+        <td>Date</td>
+        <td>Montant</td>
+        <td>Code compta</td>
+        <td>Client</td>
+        <td>Document</td>
+        <td>Commentaire</td>
+        
+    
+    </tr>
+{% set somme = 0 %}
+{% for ecriture in lastcomptes %}
+    <tr >
+                <td>{{ ecriture.Date|date("d/m/Y") }}</td>
+                <td>{{ ecriture.Montant }}</td>
+                <td>{{ ecriture.Codecompta }}</td>
+                <td>{{ ecriture.Client }}</td>
+                <td><a href={{ '/images/archives/' ~ ecriture.fichier}} target=_blank >{{ ecriture.fichier}}</a></td>
+                <td>{{ ecriture.Commentaire }}</td>
+                {% set somme = somme+ ecriture.Montant %}
+    
+    </tr>
+{% endfor %}
+
+</table>
+Total écritures  : {{ somme }} Euros
+</div>
+{% endif %}
+{% endblock %}

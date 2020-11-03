@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+ {% if app.user %}
+    <a class="navbar-brand" href="/">Index</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+   {% endif %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul class="navbar-nav mr-auto">
+   {% if app.user %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path("bilan") }}">Bilan comptable</a>
+            </li>
+         <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Administration
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{ path("administrationajout") }}">Ajout Ecriture</a>
+          <a class="dropdown-item" href="{{ path("administrationliste") }}">Liste Ecriture</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{ path("administrationclientajout") }}">Ajout Client</a>
+          <a class="dropdown-item" href="{{ path("administrationclient") }}">Liste Client</a>          
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{ path("administrationuser") }}">Gestion Users</a>
+        </div>
+      </li>
+        {% endif %}
+      {% if not app.user %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path("connexion") }}">login</a>
+            </li>
+      {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path("deconnexion") }}">logout</a>
+            </li>
+      
+       </ul>
+        <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="recherche">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    {% endif %}
+    </div>
+</nav>
