@@ -25,9 +25,11 @@
         <td>Montant</td>
         <td>Code compta</td>
         <td>Client</td>
-        <td>Document</td>
+        <td style="width:20pt">Document</td>
         <td>Commentaire</td>
         <td>Valideur</td>
+        <td>n° cheque</td>
+        <td>Pointage</td>
         <td>Actions</td>
 
     </tr>
@@ -40,10 +42,15 @@
                 <td>{{ ecriture.Montant }}</td>
                 <td>{{ ecriture.Codecompta }}</td>
                 <td><a href="{{path('administrationclientdetail',{'id' : ecriture.Client.id  })}}">{{ ecriture.Client }}</a></td>
-                <td><a href={{ '/images/archives/' ~ ecriture.fichier}} target=_blank >{{ ecriture.fichier}}</a></td>
+                <td style="width:20pt"><a href={{ '/images/archives/' ~ ecriture.fichier}} target=_blank >{{ ecriture.fichier}}</a></td>
                 <td>{{ ecriture.Commentaire}}</td>
                 <td>{{ ecriture.Comptable }}</td>
-
+                <td>{{ ecriture.Cheque }}</td>
+                 {% if not ecriture.Payement %}
+                 <td><a class="badge badge-info" href="{{path('administrationcomptevalideecriture',{'id' : ecriture.id })}}">à pointer</a></td>
+                  {% else %}
+                 <td><a class="badge badge-success" >Pointé</a></td>
+                  {% endif %}
                         
             <td>
                 <a class="btn btn-secondary" href="{{path('administrationcomptemodification',{'id' : ecriture.id })}}">Modifier</a>

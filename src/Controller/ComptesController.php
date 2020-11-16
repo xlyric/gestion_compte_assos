@@ -107,4 +107,30 @@ class ComptesController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/administration/comptes/valideecriture/{id}", name="administrationcomptevalideecriture")
+     */
+    public function valideecriture($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $ecriture = $entityManager->getRepository(Compte::class)->find($id);
+        
+        if (!$ecriture) {
+            $this->addFlash("error","écriture inexistante");
+            throw $this->createNotFoundException(
+                'No entry found for id '.$id
+            );
+        }
+
+        $ecriture->setPayement('true');
+        $entityManager->flush();
+
+        $this->addFlash("success","écriture $id pointée");
+                return $this->redirectToRoute('administrationliste', [
+                    
+                ]);
+
+    }
+
+
 }

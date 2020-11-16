@@ -21,8 +21,9 @@ class ComptesType extends AbstractType
           //  ->add('comptable')
             ->add('imageFile',FileType::class,['required'=>false])
             ->add('commentaire')
-            
-            
+            ->add('cheque')
+            ->add('payement')
+                       
             
         ;
     }

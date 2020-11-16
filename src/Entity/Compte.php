@@ -84,6 +84,16 @@ class Compte
      */
     private $updated_at;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $cheque;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $payement;
+
     public function __construct()
     {
         //$this->codecompta = new ArrayCollection();
@@ -214,6 +224,30 @@ class Compte
     public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getCheque(): ?string
+    {
+        return $this->cheque;
+    }
+
+    public function setCheque(?string $cheque): self
+    {
+        $this->cheque = $cheque;
+
+        return $this;
+    }
+
+    public function getPayement(): ?bool
+    {
+        return $this->payement;
+    }
+
+    public function setPayement(?bool $payement): self
+    {
+        $this->payement = $payement;
 
         return $this;
     }
