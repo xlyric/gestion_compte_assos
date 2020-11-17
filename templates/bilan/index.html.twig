@@ -11,6 +11,8 @@
 {% set sommetotale = 0 %}
 {% set classe = false %}
 {% set classeid = false %}
+{% set sommepointe = 0 %}
+{% set sommepointetotal = 0 %}
 
 <div class="example-wrapper">
     <h1>Bilan {{ ga_societe }}</h1>
@@ -22,6 +24,7 @@ La page du bilan de l'association
 
         <td>Code compta</td>
         <td>Montant</td>
+        <td>Dont Pointé</td>
     
     </tr>
 
@@ -29,17 +32,27 @@ La page du bilan de l'association
     {% if ecriture.Codecompta is not same as classe %} 
         {% if classe %}
         <tr> <td> <a href="{{path('bilandetail',{'id' : classeid })}} "> {{ classe }}  </a></td> 
-        <td> {{ somme }}</td> </tr>
+        <td> {{ somme }}</td> 
+        <td> {{ sommepointe }}</td> 
+        </tr>
         {% endif %}
 
     {% set classe = ecriture.Codecompta  %} 
     {% set classeid = ecriture.Codecompta.id %}
     {% set somme = 0 %}
+    {% set sommepointe = 0 %}
     {% set somme = somme+ ecriture.Montant %}
+                {% if ecriture.Payement %}
+                {% set sommepointe = sommepointe+ ecriture.Montant %}
+                {% set sommepointetotal = sommepointetotal+ ecriture.Montant %}
+                {% endif %}
     
     {% else  %}
     {% set somme = somme+ ecriture.Montant %}
-    
+                {% if ecriture.Payement %}
+                {% set sommepointe = sommepointe+ ecriture.Montant %}
+                {% set sommepointetotal = sommepointetotal+ ecriture.Montant %}
+                {% endif %}
     {% endif  %}
 
 
@@ -48,12 +61,13 @@ La page du bilan de l'association
 {% endfor %}
 
         <tr> <td><a  href="{{path('bilandetail',{'id' : classeid })}} "> {{ classe }}  </a></td> 
-        <td> {{ somme }}</td> </tr>
+        <td> {{ somme }}</td> 
+        <td> {{ sommepointe }}</td> </tr>
 
 
 
 </table>
-Total Bilan : {{ sommetotale }} Euros
-
+Bilan Pointé : {{ sommepointetotal }} Euros<br>
+En Attente de pointage {{sommetotale -sommepointetotal }} Euros 
 </div>
 {% endblock %}

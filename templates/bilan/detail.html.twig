@@ -27,6 +27,7 @@ La page du bilan de l'association
     </tr>
 
 {% set somme = 0 %}
+{% set sommepointe = 0 %}
 {% set code = false %}
 
 {% for ecriture in lastcomptes %}
@@ -36,14 +37,18 @@ La page du bilan de l'association
                 <td><a href="{{path('administrationclientdetail',{'id' : ecriture.Client.id  })}}">{{ ecriture.Client }}</a></td>
                 <td><a href={{ '/images/archives/' ~ ecriture.fichier}} target=_blank >{{ ecriture.fichier}}</a></td>
                 <td>{{ ecriture.Commentaire }}</td>
+                {% if ecriture.Payement %}
+                {% set sommepointe = sommepointe+ ecriture.Montant %}
+                {% endif %}
                 {% set somme = somme+ ecriture.Montant %}
-    
+                
     </tr>
     {% set code =  ecriture.Codecompta  %}
 {% endfor %}
 
 </table>
-<b>{{ code }}</b> -  Total Bilan  : {{ somme }} Euros
+<b>{{ code }}</b> -  Total Bilan  : {{ somme }} Euros <br>
+Total pointé  : {{ sommepointe }} Euros
 
 
 </div>
