@@ -51,6 +51,17 @@ class CompteRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getannee()
+    {
+        return $this->createQueryBuilder('d')
+            ->select('YEAR(d.date) as year')
+            ->orderBy('year', 'DESC')
+            ->groupBy('year')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Compte[] Returns an array of Compte objects
     //  */

@@ -19,9 +19,12 @@
 
 La page du bilan de l'association<br>
 <form name="bilan" method="post" >
-       <select id="annee" name="annee" class="form-control" onchange="this.form.submit()">
-       <option value="2020" {% if annee == '2020' %} selected {% endif %}>2020</option>
-       <option value="2021" {% if annee == '2021' %} selected {% endif %}>2021</option>
+<select id="annee" name="annee" class="form-control" onchange="this.form.submit()">
+
+    {% for an in annedispo %}
+    <option value="{{ an.year }}" {% if annee == an.year %} selected {% endif %}>{{ an.year }}</option>
+    {% endfor %}
+    
        <select>
 </form>
 

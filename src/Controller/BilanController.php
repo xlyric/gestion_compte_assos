@@ -17,18 +17,21 @@ class BilanController extends AbstractController
     public function bilan(Request $request): Response
     {
         $repository = $this->getDoctrine()->getRepository(Compte::class);
-        $annee="2020";
-
         
+        $anneedispo = $repository->getannee();
+        $annee=$anneedispo[0]["year"];
+        //dd($annedispo[0]["year"]);
         if ( $request->getMethod() == "POST" ) {
         $annee=$request->get('annee');;
-        
         }
+        
         $lastcomptes = $repository->getbilan($annee);
+        
 
         return $this->render('bilan/index.html.twig', [
             "lastcomptes" => $lastcomptes,
-            "annee" => $annee
+            "annee" => $annee,
+            "annedispo" => $anneedispo
         ]);
     }
 
