@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bilan{% endblock %}
+{% block title %}Bilan {{ annee }}{% endblock %}
 
 {% block body %}
 <style>
@@ -15,9 +15,15 @@
 {% set sommepointetotal = 0 %}
 
 <div class="example-wrapper">
-    <h1>Bilan {{ ga_societe }}</h1>
+    <h1>Bilan {{ ga_societe }} {{ annee }}</h1>
 
-La page du bilan de l'association
+La page du bilan de l'association<br>
+<form name="bilan" method="post" >
+       <select id="annee" name="annee" class="form-control" onchange="this.form.submit()">
+       <option value="2020" {% if annee == '2020' %} selected {% endif %}>2020</option>
+       <option value="2021" {% if annee == '2021' %} selected {% endif %}>2021</option>
+       <select>
+</form>
 
 <table class="table">
     <tr class="table-primary">

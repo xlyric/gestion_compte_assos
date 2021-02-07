@@ -40,9 +40,11 @@ class CompteRepository extends ServiceEntityRepository
         ;
     }
    
-    public function getbilan()
+    public function getbilan($annee)
     {
         return $this->createQueryBuilder('c')
+            ->where('YEAR(c.date) = :val')
+            ->setParameter('val', $annee)
             ->orderBy('c.codecompta', 'ASC')
             ->getQuery()
             ->getResult()
