@@ -4,5 +4,5 @@ twig:
 
     globals:
         ga_societe: "Assos"
-        ga_version: "1.0"
+        ga_version: "1.1"
         
