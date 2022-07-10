@@ -51,3 +51,14 @@ il est conseillé de créer ou modifier le .htaccess pour faire fonctionner l'ap
  </IfModule>
 
 ```
+
+
+## Debug, 
+en cas de message 
+curl error 6 while downloading https://flex.symfony.com/versions.json: Could not resolve host: flex.symfony.com  
+
+faire la commande 
+``` 
+composer update symfony/flex --no-plugins --no-scripts
+```
+
